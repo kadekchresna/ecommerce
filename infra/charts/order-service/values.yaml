@@ -1,7 +1,7 @@
 replicaCount: 2
 image:
   repository: ghcr.io/kadekchresna/order-service
-  tag: v1
+  tag: latest
   pullPolicy: IfNotPresent
 
 service:
@@ -15,35 +15,39 @@ resources:
     cpu: "250m"
 
 livenessProbe:
-  path: /healthz
+  path: /api/v1/healthz
   initialDelaySeconds: 15
   periodSeconds: 20
 
 readinessProbe:
-  path: /healthz
+  path: /api/v1/healthz
   initialDelaySeconds: 5
   periodSeconds: 10
 
 postgresql:
-  enabled: true
   auth:
-    username: ordersvc
-    password: ordersvcpass
-    database: orderdb
-  architecture: standalone
+    password: ""
+    username: oms
+    database: omsdb
+    existingSecret: "order-service-postgresql"
   primary:
     persistence:
       enabled: true
-      size: 1Gi
-      storageClass: standard
+      size: 2Gi
+      storageClass: "standard"
+  service:
+    type: ClusterIP
+    port: 5432
 
 redis:
-  enabled: true
-  architecture: standalone
   auth:
     enabled: false
+  architecture: standalone
   master:
     persistence:
       enabled: true
-      size: 512Mi
-      storageClass: standard
+      size: 1Gi
+      storageClass: "standard"
+  service:
+    type: ClusterIP
+    port: 6379

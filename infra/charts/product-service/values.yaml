@@ -1,7 +1,7 @@
 replicaCount: 2
 image:
   repository: ghcr.io/kadekchresna/product-service
-  tag: v1
+  tag: latest
   pullPolicy: IfNotPresent
 service:
   type: ClusterIP
@@ -12,30 +12,25 @@ resources:
     memory: "128Mi"
     cpu: "250m"
 livenessProbe:
-  path: /healthz
+  path: /api/v1/healthz
   initialDelaySeconds: 15
   periodSeconds: 20
 readinessProbe:
-  path: /healthz
+  path: /api/v1/healthz
   initialDelaySeconds: 5
   periodSeconds: 10
 
 postgresql:
-  enabled: true
   auth:
+    password: ""
     username: productsvc
-    password: productsvcpass
     database: productdb
-  architecture: standalone
+    existingSecret: "product-service-postgresql"
   primary:
     persistence:
       enabled: true
-      size: 1Gi
-      storageClass: standard
-
-createSecret: true
-secrets:
-  postgres:
-    user: productsvc
-    password: productsvcpass
-    database: productdb
+      size: 2Gi
+      storageClass: "standard"
+  service:
+    type: ClusterIP
+    port: 5432

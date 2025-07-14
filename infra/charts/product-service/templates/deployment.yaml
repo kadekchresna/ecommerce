@@ -1,45 +1,48 @@
-# templates/deployment.yaml
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: { { include (print .Chart.Name ".fullname") . } }
+  name: {{ include "product-service.fullname" . }}
   labels:
-    app: { { include (print .Chart.Name ".name") . } }
+    app.kubernetes.io/name: {{ include "product-service.name" . }}
+    app.kubernetes.io/instance: {{ .Release.Name }}
 spec:
-  replicas: { { .Values.replicaCount } }
+  replicas: {{ .Values.replicaCount }}
   selector:
     matchLabels:
-      app: { { include (print .Chart.Name ".name") . } }
+      app.kubernetes.io/name: {{ include "product-service.name" . }}
+      app.kubernetes.io/instance: {{ .Release.Name }}
   template:
     metadata:
       labels:
-        app: { { include (print .Chart.Name ".name") . } }
+        app.kubernetes.io/name: {{ include "product-service.name" . }}
+        app.kubernetes.io/instance: {{ .Release.Name }}
     spec:
       containers:
-        - name: { { print (include (print .Chart.Name ".name") .) "-web" } }
+        - name: {{ .Chart.Name }}
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
-          imagePullPolicy: { { .Values.image.pullPolicy } }
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          command: ["./product-service"]
           args: ["web"]
           ports:
-            - containerPort: { { .Values.service.targetPort } }
+            - containerPort: {{ .Values.service.targetPort }}
           resources:
             limits:
-              memory: { { .Values.resources.limits.memory } }
-              cpu: { { .Values.resources.limits.cpu } }
+              memory: {{ .Values.resources.limits.memory | quote }}
+              cpu: {{ .Values.resources.limits.cpu | quote }}
           readinessProbe:
             httpGet:
-              path: { { .Values.readinessProbe.path } }
-              port: { { .Values.service.targetPort } }
+              path: {{ .Values.readinessProbe.path }}
+              port: {{ .Values.service.targetPort }}
             initialDelaySeconds:
-              { { .Values.readinessProbe.initialDelaySeconds } }
-            periodSeconds: { { .Values.readinessProbe.periodSeconds } }
+              {{ .Values.readinessProbe.initialDelaySeconds }}
+            periodSeconds: {{ .Values.readinessProbe.periodSeconds }}
           livenessProbe:
             httpGet:
-              path: { { .Values.livenessProbe.path } }
-              port: { { .Values.service.targetPort } }
+              path: {{ .Values.livenessProbe.path }}
+              port: {{ .Values.service.targetPort }}
             initialDelaySeconds:
-              { { .Values.livenessProbe.initialDelaySeconds } }
-            periodSeconds: { { .Values.livenessProbe.periodSeconds } }
+              {{ .Values.livenessProbe.initialDelaySeconds }}
+            periodSeconds: {{ .Values.livenessProbe.periodSeconds }}
           env:
             - name: DB_DSN
               value: >-
@@ -47,24 +50,26 @@ spec:
             - name: POSTGRES_USER
               valueFrom:
                 secretKeyRef:
-                  name: {{ include (print .Chart.Name ".fullname") . }}-secrets
-                  key: postgres-user
+                  name: {{ include (print .Chart.Name ".fullname") . }}-secret
+                  key: POSTGRES_USER
             - name: POSTGRES_PASSWORD
               valueFrom:
                 secretKeyRef:
-                  name: {{ include (print .Chart.Name ".fullname") . }}-secrets
-                  key: postgres-password
+                  name: product-service-postgresql
+                  key: password
             - name: POSTGRES_DB
               valueFrom:
                 secretKeyRef:
-                  name: {{ include (print .Chart.Name ".fullname") . }}-secrets
-                  key: postgres-database
+                  name: {{ include (print .Chart.Name ".fullname") . }}-secret
+                  key: POSTGRES_DB
+            - name: POSTGRES_HOST
+              value: "{{ .Release.Name }}-postgresql"
             - name: APP_NAME
               value: product
             - name: APP_ENV
               value: prd
             - name: APP_PORT
-              value: 8081
+              value: "8081"
             - name: APP_STATIC_TOKEN
               value: secret
             - name: APP_JWT_SECRET

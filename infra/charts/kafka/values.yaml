@@ -1,0 +1,40 @@
+kafka:
+  enabled: true
+  fullnameOverride: kafka
+  kraft:
+    enabled: true
+    clusterId: "local-cluster-id"
+  controller:
+    replicaCount: 1
+  broker:
+    replicaCount: 1
+  provisioning:
+    enabled: false
+  listeners:
+    client:
+      protocol: PLAINTEXT
+      port: 9092
+    external:
+      protocol: PLAINTEXT
+      port: 29092
+  advertisedListeners:
+    client:
+      name: PLAINTEXT
+      address: kafka
+      port: 9092
+    external:
+      name: EXTERNAL
+      address: localhost
+      port: 29092
+  persistence:
+    enabled: true
+    size: 3Gi
+    storageClass: "standard"
+  service:
+    type: ClusterIP
+  externalAccess:
+    enabled: true
+    service:
+      type: NodePort
+    autoDiscovery:
+      enabled: true

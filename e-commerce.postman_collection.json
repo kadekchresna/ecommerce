@@ -1,0 +1,737 @@
+{
+	"info": {
+		"_postman_id": "0fb605be-a009-42cd-913a-134abcb1c8ba",
+		"name": "e-commerce",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "7128831",
+		"_collection_link": "https://sf-dis-buyback.postman.co/workspace/2ea2b843-8fcb-45cd-868b-0dbc6c63d9b0/collection/7128831-0fb605be-a009-42cd-913a-134abcb1c8ba?action=share&source=collection_link&creator=7128831"
+	},
+	"item": [
+		{
+			"name": "user service",
+			"item": [
+				{
+					"name": "Login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email_or_phone_number\": \"admin@mail.com\",\n    \"password\": \"1234567890\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{user-service-local}}/api/v1/auth/login",
+							"host": [
+								"{{user-service-local}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Healthz",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email_or_phone_number\": \"admin@mail.com\",\n    \"password\": \"1234567890\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{user-service-local}}/api/v1/healthz",
+							"host": [
+								"{{user-service-local}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"healthz"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "product service",
+			"item": [
+				{
+					"name": "Get Products Paginate",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-App-Token",
+								"value": "Bearer secret",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email_or_phone_number\": \"admin@mail.com\",\n    \"password\": \"1234567890\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{product-service-local}}/api/v1/products?limit=5&page=1",
+							"host": [
+								"{{product-service-local}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"products"
+							],
+							"query": [
+								{
+									"key": "limit",
+									"value": "5"
+								},
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "search",
+									"value": null,
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Products",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-App-Token",
+								"value": "Bearer secret",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email_or_phone_number\": \"admin@mail.com\",\n    \"password\": \"1234567890\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{product-service-local}}/api/v1/products/96a70723-dc22-4ecd-abbf-b9024b736b22",
+							"host": [
+								"{{product-service-local}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"products",
+								"96a70723-dc22-4ecd-abbf-b9024b736b22"
+							],
+							"query": [
+								{
+									"key": "search",
+									"value": null,
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Healthz",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-App-Token",
+								"value": "Bearer secret",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email_or_phone_number\": \"admin@mail.com\",\n    \"password\": \"1234567890\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{product-service-local}}/api/v1/healthz",
+							"host": [
+								"{{product-service-local}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"healthz"
+							],
+							"query": [
+								{
+									"key": "search",
+									"value": null,
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "order service",
+			"item": [
+				{
+					"name": "Checkout",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiYmFmNjRmNzktMGJjMi00MzMzLWIxMjYtYzM2NDQ1ZTY4NTFiIiwidXNlcl9mdWxsbmFtZSI6ImFkbWluIiwiZXhwIjoxNzUzMDUyMjgxLCJpYXQiOjE3NTI0NDc0ODF9.bJOMYGzlz3On8CbMfQXtmLKroUfBuSytSNhN3PWMbbY",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"order_details\": [\n        {\n            \"product_uuid\": \"13744495-caa4-4e93-bdb2-68b68c0742e2\",\n            \"quantity\": 2\n        },\n        {\n            \"product_uuid\": \"50ca5859-f78c-4c8a-a311-a8da117c6ab8\",\n            \"quantity\": 3\n        }\n    ]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{order-service-local}}/api/v1/order/checkout",
+							"host": [
+								"{{order-service-local}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"order",
+								"checkout"
+							],
+							"query": [
+								{
+									"key": "search",
+									"value": null,
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Run Outbox",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "X-App-Token",
+								"value": "Bearer secret",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{order-service-local}}/api/v1/order/run-outbox",
+							"host": [
+								"{{order-service-local}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"order",
+								"run-outbox"
+							],
+							"query": [
+								{
+									"key": "search",
+									"value": null,
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Run Inbox",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "X-App-Token",
+								"value": "Bearer secret",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{order-service-local}}/api/v1/order/run-inbox",
+							"host": [
+								"{{order-service-local}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"order",
+								"run-inbox"
+							],
+							"query": [
+								{
+									"key": "search",
+									"value": null,
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Healthz",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-App-Token",
+								"value": "Bearer secret",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{order-service-local}}/api/v1/healthz",
+							"host": [
+								"{{order-service-local}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"healthz"
+							],
+							"query": [
+								{
+									"key": "search",
+									"value": null,
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Set Order to Complete",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "X-App-Token",
+								"value": "Bearer secret",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{order-service-local}}/api/v1/order/set-completed/82cfdd43-a778-46ce-b6c2-4d1bf9916d70",
+							"host": [
+								"{{order-service-local}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"order",
+								"set-completed",
+								"82cfdd43-a778-46ce-b6c2-4d1bf9916d70"
+							],
+							"query": [
+								{
+									"key": "search",
+									"value": null,
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Set Order to Expired",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "X-App-Token",
+								"value": "Bearer secret",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{order-service-local}}/api/v1/order/set-expired",
+							"host": [
+								"{{order-service-local}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"order",
+								"set-expired"
+							],
+							"query": [
+								{
+									"key": "search",
+									"value": null,
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "warehouse service",
+			"item": [
+				{
+					"name": "Get Products Stock",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiMDAwMDAwMDAtMDAwMC0wMDAwLTAwMDAtMDAwMDAwMDAwMDAwIiwidXNlcl9mdWxsbmFtZSI6IiIsImV4cCI6MTc1MjQzMjg1NCwiaWF0IjoxNzUyNDMxOTU0fQ.eFrFDR6c5mDiO0ZyWOGxFkieHIjUt2BKnWppjcRCOo4",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email_or_phone_number\": \"admin@mail.com\",\n    \"password\": \"1234567890\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{warehouse-service-local}}/api/v1/warehouse/stock/96a70723-dc22-4ecd-abbf-b9024b736b22",
+							"host": [
+								"{{warehouse-service-local}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"warehouse",
+								"stock",
+								"96a70723-dc22-4ecd-abbf-b9024b736b22"
+							],
+							"query": [
+								{
+									"key": "search",
+									"value": null,
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Healthz",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiMDAwMDAwMDAtMDAwMC0wMDAwLTAwMDAtMDAwMDAwMDAwMDAwIiwidXNlcl9mdWxsbmFtZSI6IiIsImV4cCI6MTc1MjQzMjg1NCwiaWF0IjoxNzUyNDMxOTU0fQ.eFrFDR6c5mDiO0ZyWOGxFkieHIjUt2BKnWppjcRCOo4",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email_or_phone_number\": \"admin@mail.com\",\n    \"password\": \"1234567890\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{warehouse-service-local}}/api/v1/healthz",
+							"host": [
+								"{{warehouse-service-local}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"healthz"
+							],
+							"query": [
+								{
+									"key": "search",
+									"value": null,
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Run Inbox",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "X-App-Token",
+								"value": "secret",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{warehouse-service-local}}/api/v1/warehouse/run-inbox",
+							"host": [
+								"{{warehouse-service-local}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"warehouse",
+								"run-inbox"
+							],
+							"query": [
+								{
+									"key": "search",
+									"value": null,
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Run Outbox",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "X-App-Token",
+								"value": "secret",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{warehouse-service-local}}/api/v1/warehouse/run-outbox",
+							"host": [
+								"{{warehouse-service-local}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"warehouse",
+								"run-outbox"
+							],
+							"query": [
+								{
+									"key": "search",
+									"value": null,
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "shop service",
+			"item": [
+				{
+					"name": "Get Shop",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-App-Token",
+								"value": "Bearer secret",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email_or_phone_number\": \"admin@mail.com\",\n    \"password\": \"1234567890\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{shop-service-local}}/api/v1/shops/ee7ae731-2eed-42f6-8852-d84c8847f112",
+							"host": [
+								"{{shop-service-local}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"shops",
+								"ee7ae731-2eed-42f6-8852-d84c8847f112"
+							],
+							"query": [
+								{
+									"key": "search",
+									"value": null,
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Healthz",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-App-Token",
+								"value": "Bearer secret",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email_or_phone_number\": \"admin@mail.com\",\n    \"password\": \"1234567890\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{shop-service-local}}/api/v1/healthz",
+							"host": [
+								"{{shop-service-local}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"healthz"
+							],
+							"query": [
+								{
+									"key": "search",
+									"value": null,
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

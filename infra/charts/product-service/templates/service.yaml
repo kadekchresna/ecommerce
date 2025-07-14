@@ -1,15 +1,14 @@
-# templates/service.yaml
 apiVersion: v1
 kind: Service
 metadata:
-  name: { { include (print .Chart.Name ".fullname") . } }
+  name: {{ include "product-service.fullname" . }}
   labels:
-    app: { { include (print .Chart.Name ".name") . } }
+    app.kubernetes.io/name: {{ include "product-service.name" . }}
 spec:
-  type: { { .Values.service.type } }
+  type: {{ .Values.service.type }}
   selector:
-    app: { { include (print .Chart.Name ".name") . } }
+    app.kubernetes.io/name: {{ include "product-service.name" . }}
   ports:
     - protocol: TCP
-      port: { { .Values.service.port } }
-      targetPort: { { .Values.service.targetPort } }
+      port: {{ .Values.service.port }}
+      targetPort: {{ .Values.service.targetPort }}

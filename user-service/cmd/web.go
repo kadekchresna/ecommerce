@@ -75,7 +75,6 @@ func run() {
 		os.Getenv("POSTGRES_HOST"),
 		os.Getenv("POSTGRES_DB"),
 	)
-	logger.LogWithContext(context.Background()).Info(fmt.Sprintf("dsn %s", dsn))
 	db := driver_db.InitDB(dsn)
 
 	// V1 Endpoints

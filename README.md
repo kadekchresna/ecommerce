@@ -10,7 +10,6 @@ This is a collective of backend services for managing product, shops, users, war
 - JWT-based authentication
 - User role seperation
 - GORM-powered database access layer
-- Unit test support with mocking
 
 ## Tech Stack
 
@@ -33,7 +32,7 @@ This is a collective of backend services for managing product, shops, users, war
 .
 ├── Makefile
 ├── README.md
-├── infra
+├── infra                   # deployment purposes
 │   └── charts
 ├── order-service
 │   ├── Dockerfile
@@ -49,13 +48,15 @@ This is a collective of backend services for managing product, shops, users, war
 │       ├── kafka/
 │       ├── lock/
 │       └── messaging/
-│   ├── internal/
-│   └── v1/                   # core logic versioning
-│       ├── delivery/
-│       ├── dto/
-│       ├── model/
-│       ├── repository/
-│       └── usecase/
+│   ├── internal/           # core logic 
+│   └── v1/                 # core logic versioning 
+│       ├── delivery/       # top level layer to be serve based on communication type
+│           └── http/
+│           └── consumer/
+│       ├── dto/            # data transfer object for comunication standart each layer
+│       ├── model/          # core data standart 
+│       ├── repository/     # data queries and third party communication
+│       └── usecase/        # business logic layer
 │   └── v2/
 │       ├── ...
 │   ├── main.go
@@ -67,6 +68,8 @@ This is a collective of backend services for managing product, shops, users, war
 ├── user-service
 │   └── ...
 └── warehouse-service
+│   └── ...
+└── migration                # db template and data dummy
 │   └── ...
 ```
 
@@ -82,3 +85,10 @@ This project dividing code into layers:
 
 - [Docker](https://www.docker.com/)
 - [minikube](https://minikube.sigs.k8s.io/)
+- [helm](https://helm.sh/)
+
+
+## How to run
+```
+    make ecommerce-up
+```
