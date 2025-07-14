@@ -1,6 +1,6 @@
 replicaCount: 2
 image:
-  repository: ghcr.io/kadekchresna/order-service
+  repository: ghcr.io/kadekchresna/orders-service
   tag: latest
   pullPolicy: IfNotPresent
 
