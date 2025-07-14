@@ -1,0 +1,41 @@
+replicaCount: 2
+image:
+  repository: ghcr.io/kadekchresna/product-service
+  tag: v1
+  pullPolicy: IfNotPresent
+service:
+  type: ClusterIP
+  port: 80
+  targetPort: 8081
+resources:
+  limits:
+    memory: "128Mi"
+    cpu: "250m"
+livenessProbe:
+  path: /healthz
+  initialDelaySeconds: 15
+  periodSeconds: 20
+readinessProbe:
+  path: /healthz
+  initialDelaySeconds: 5
+  periodSeconds: 10
+
+postgresql:
+  enabled: true
+  auth:
+    username: productsvc
+    password: productsvcpass
+    database: productdb
+  architecture: standalone
+  primary:
+    persistence:
+      enabled: true
+      size: 1Gi
+      storageClass: standard
+
+createSecret: true
+secrets:
+  postgres:
+    user: productsvc
+    password: productsvcpass
+    database: productdb

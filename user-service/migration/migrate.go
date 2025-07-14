@@ -10,7 +10,7 @@ import (
 	"github.com/golang-migrate/migrate/v4/database/postgres"
 	_ "github.com/golang-migrate/migrate/v4/source/file"
 	"github.com/joho/godotenv"
-	"github.com/kadekchresna/go-boilerplate/config"
+	"github.com/kadekchresna/ecommerce/user-service/config"
 
 	_ "github.com/lib/pq"
 )
@@ -43,7 +43,7 @@ func main() {
 
 	currentDir, err := os.Getwd()
 	if err != nil {
-		fmt.Println("Error getting current directory:", err)
+		fmt.Println("error getting current directory:", err)
 		return
 	}
 

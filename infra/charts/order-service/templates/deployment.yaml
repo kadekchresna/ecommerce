@@ -1,0 +1,42 @@
+# templates/deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: { { include (print .Chart.Name ".fullname") . } }
+  labels:
+    app: { { include (print .Chart.Name ".name") . } }
+spec:
+  replicas: { { .Values.replicaCount } }
+  selector:
+    matchLabels:
+      app: { { include (print .Chart.Name ".name") . } }
+  template:
+    metadata:
+      labels:
+        app: { { include (print .Chart.Name ".name") . } }
+    spec:
+      containers:
+        - name: { { include (print .Chart.Name ".name") . } }
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          imagePullPolicy: { { .Values.image.pullPolicy } }
+          args: ["web"]
+          ports:
+            - containerPort: { { .Values.service.targetPort } }
+          resources:
+            limits:
+              memory: { { .Values.resources.limits.memory } }
+              cpu: { { .Values.resources.limits.cpu } }
+          readinessProbe:
+            httpGet:
+              path: { { .Values.readinessProbe.path } }
+              port: { { .Values.service.targetPort } }
+            initialDelaySeconds:
+              { { .Values.readinessProbe.initialDelaySeconds } }
+            periodSeconds: { { .Values.readinessProbe.periodSeconds } }
+          livenessProbe:
+            httpGet:
+              path: { { .Values.livenessProbe.path } }
+              port: { { .Values.service.targetPort } }
+            initialDelaySeconds:
+              { { .Values.livenessProbe.initialDelaySeconds } }
+            periodSeconds: { { .Values.livenessProbe.periodSeconds } }

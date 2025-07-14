@@ -1,7 +1,12 @@
 package repository_interface
 
-import "github.com/kadekchresna/go-boilerplate/internal/v1/model"
+import (
+	"context"
+
+	"github.com/kadekchresna/ecommerce/user-service/internal/v1/helper/dto"
+	"github.com/kadekchresna/ecommerce/user-service/internal/v1/model"
+)
 
 type IUsersRepository interface {
-	Get() (*model.Users, error)
+	GetByEmailOrPhoneNumber(ctx context.Context, request *dto.LoginUserRequest) (*model.Users, error)
 }

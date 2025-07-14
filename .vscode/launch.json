@@ -1,0 +1,41 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+
+        // {
+        //     "name": "Order Web Service",
+        //     "type": "go",
+        //     "request": "launch",
+        //     "mode": "auto",
+        //     "program": "${workspaceFolder}/order-service",
+        //     "args": ["web"]
+        // },
+        // {
+        //     "name": "Order Consumer Service",
+        //     "type": "go",
+        //     "request": "launch",
+        //     "mode": "auto",
+        //     "program": "${workspaceFolder}/order-service",
+        //     "args": ["consumer"]
+        // },
+        // {
+        //     "name": "Warehouse Web Service",
+        //     "type": "go",
+        //     "request": "launch",
+        //     "mode": "auto",
+        //     "program": "${workspaceFolder}/warehouse-service",
+        //     "args": ["web"]
+        // },
+        // {
+        //     "name": "Warehouse Consumer Service",
+        //     "type": "go",
+        //     "request": "launch",
+        //     "mode": "auto",
+        //     "program": "${workspaceFolder}/warehouse-service",
+        //     "args": ["consumer"]
+        // }
+    ]
+}

@@ -1,0 +1,9 @@
+apiVersion: v2
+name: eCommerce
+version: 0.1.0
+description: A Helm chart for deploying the eCommerce services
+type: application
+dependencies:
+  - name: kafka
+    version: 26.4.1
+    repository: https://charts.bitnami.com/bitnami

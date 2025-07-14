@@ -1,0 +1,5 @@
+__debug*
+.vscode
+.env
+.DS_Store
+*.out

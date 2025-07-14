@@ -4,12 +4,12 @@ import (
 	"time"
 
 	"github.com/google/uuid"
-	"github.com/kadekchresna/go-boilerplate/internal/v1/model"
+	"github.com/kadekchresna/ecommerce/user-service/internal/v1/model"
 )
 
 type UsersDAO struct {
 	UUID      uuid.UUID `gorm:"type:uuid;primaryKey"`
-	FullName  string    `gorm:"type:varchar;not null;default:''"`
+	Fullname  string    `gorm:"type:varchar;not null;default:''"`
 	Code      string    `gorm:"type:varchar;not null;default:'';"`
 	CreatedAt time.Time `gorm:"type:timestamptz;not null;default:now()"`
 	UpdatedAt time.Time `gorm:"type:timestamptz;not null;default:now()"`
@@ -24,7 +24,7 @@ func (UsersDAO) TableName() string {
 func (u UsersDAO) ToModel() model.Users {
 	return model.Users{
 		UUID:      u.UUID,
-		FullName:  u.FullName,
+		FullName:  u.Fullname,
 		Code:      u.Code,
 		CreatedAt: u.CreatedAt,
 		UpdatedAt: u.UpdatedAt,
@@ -44,6 +44,8 @@ type UsersAuthDAO struct {
 	UserUUID    uuid.UUID `gorm:"type:uuid;not null;index:user_auth_user_uuid_idx"`
 	CreatedBy   uuid.UUID `gorm:"type:uuid;not null"`
 	UpdatedBy   uuid.UUID `gorm:"type:uuid;not null"`
+
+	User UsersDAO `gorm:"foreignKey:UUID;references:UserUUID"`
 }
 
 func (UsersAuthDAO) TableName() string {

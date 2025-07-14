@@ -1,18 +1,19 @@
 package cmd
 
 import (
+	"context"
 	"fmt"
 	"log"
 	"net/http"
 	"os"
 
 	"github.com/joho/godotenv"
-	"github.com/kadekchresna/go-boilerplate/config"
-	"github.com/kadekchresna/go-boilerplate/helper/logger"
-	driver_db "github.com/kadekchresna/go-boilerplate/infrastructure/db"
-	handler "github.com/kadekchresna/go-boilerplate/internal/v1/delivery/http"
-	"github.com/kadekchresna/go-boilerplate/internal/v1/repository"
-	"github.com/kadekchresna/go-boilerplate/internal/v1/usecase"
+	"github.com/kadekchresna/ecommerce/user-service/config"
+	"github.com/kadekchresna/ecommerce/user-service/helper/logger"
+	driver_db "github.com/kadekchresna/ecommerce/user-service/infrastructure/db"
+	handler "github.com/kadekchresna/ecommerce/user-service/internal/v1/delivery/http"
+	"github.com/kadekchresna/ecommerce/user-service/internal/v1/repository"
+	"github.com/kadekchresna/ecommerce/user-service/internal/v1/usecase"
 	"github.com/labstack/echo/v4"
 	"github.com/labstack/echo/v4/middleware"
 	"github.com/spf13/cobra"
@@ -66,12 +67,23 @@ func run() {
 	e.Use(logger.ClientIPMiddleware)
 
 	config := config.InitConfig()
-	db := driver_db.InitDB(config.DatabaseDSN)
+
+	dsn := fmt.Sprintf(
+		"postgres://%s:%s@%s:5432/%s?sslmode=disable",
+		os.Getenv("POSTGRES_USER"),
+		os.Getenv("POSTGRES_PASSWORD"),
+		os.Getenv("POSTGRES_HOST"),
+		os.Getenv("POSTGRES_DB"),
+	)
+	logger.LogWithContext(context.Background()).Info(fmt.Sprintf("dsn %s", dsn))
+	db := driver_db.InitDB(dsn)
 
 	// V1 Endpoints
 	v1 := e.Group("/api/v1")
 
-	handler.NewUsersHandler(v1, usecase.NewUsersUsecase(repository.NewUsersRepository(db)))
+	handler.NewHealthHandler(v1, db)
+
+	handler.NewAuthHandler(v1, usecase.NewAuthUsecase(config, repository.NewUsersRepository(db)))
 	// V1 Endpoints
 
 	s := http.Server{
@@ -79,10 +91,10 @@ func run() {
 		Handler: e,
 	}
 
-	logger.Log().Info(fmt.Sprintf("%s service started...", config.AppName))
+	logger.LogWithContext(context.Background()).Info(fmt.Sprintf("%s service started...", config.AppName))
 	if err := s.ListenAndServe(); err != http.ErrServerClosed {
 		log.Fatal(err)
 	}
 
-	logger.Log().Info(fmt.Sprintf("%s service finished", config.AppName))
+	logger.LogWithContext(context.Background()).Info(fmt.Sprintf("%s service finished", config.AppName))
 }

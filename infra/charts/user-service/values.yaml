@@ -1,0 +1,36 @@
+replicaCount: 2
+image:
+  repository: ghcr.io/kadekchresna/user-service
+  tag: v1.2
+  pullPolicy: IfNotPresent
+service:
+  type: ClusterIP
+  port: 80
+  targetPort: 8081
+resources:
+  limits:
+    memory: "128Mi"
+    cpu: "250m"
+livenessProbe:
+  path: /healthz
+  initialDelaySeconds: 15
+  periodSeconds: 20
+readinessProbe:
+  path: /healthz
+  initialDelaySeconds: 5
+  periodSeconds: 10
+
+postgresql:
+  auth:
+    password: ""
+    username: usersvc
+    database: userdb
+    existingSecret: "user-service-postgresql"
+  primary:
+    persistence:
+      enabled: true
+      size: 2Gi
+      storageClass: "standard"
+  service:
+    type: ClusterIP
+    port: 5432
