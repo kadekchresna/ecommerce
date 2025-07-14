@@ -76,8 +76,8 @@ This is a collective of backend services for managing product, shops, users, war
 This project dividing code into layers:
 
 - Model (Domain) – pure business objects and logic
-- DTO (Application) – for external data exchange
-- Repository – actual DB queries using GORM
+- DTO (Application) – for external and each layers data exchange
+- Repository – actual DB queries using GORM and third party communication
 - Usecase – orchestrates business logic
 - Delivery – handles routing and request parsing
 
