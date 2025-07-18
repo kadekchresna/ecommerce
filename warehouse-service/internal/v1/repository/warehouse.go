@@ -102,6 +102,7 @@ func (r *warehouseRepository) UpdateReserveStock(ctx context.Context, request dt
 			return err
 		}
 
+		updateStocks := []dao.WarehouseStockDAO{}
 		for _, s := range request.OrderDetails {
 
 			ws := dao.WarehouseStockDAO{}
@@ -123,15 +124,6 @@ func (r *warehouseRepository) UpdateReserveStock(ctx context.Context, request dt
 			}
 
 			available := ws.StartQuantity - ws.ReserveQuantity
-			if available >= s.StockAmountToReduce {
-
-				ws.ReserveQuantity += s.StockAmountToReduce
-
-				if err := tx.Save(&ws).Error; err != nil {
-					logger.LogWithContext(ctx).Error(fmt.Sprintf("error Query Update :: warehouseRepository.UpdateStock().Save(). %s", err.Error()))
-					return err
-				}
-			}
 
 			if w.Status != model.WarehouseStatusActive {
 				note = standart_error.ErrorWarehouseInactive
@@ -145,6 +137,18 @@ func (r *warehouseRepository) UpdateReserveStock(ctx context.Context, request dt
 				break
 			}
 
+			if available >= s.StockAmountToReduce {
+
+				ws.ReserveQuantity += s.StockAmountToReduce
+				updateStocks = append(updateStocks, ws)
+			}
+		}
+
+		if len(updateStocks) == len(request.OrderDetails) {
+			if err := tx.Save(&updateStocks).Error; err != nil {
+				logger.LogWithContext(ctx).Error(fmt.Sprintf("error Query Update :: warehouseRepository.UpdateStock().Save(). %s", err.Error()))
+				return err
+			}
 		}
 
 		messageID := r.helperUUID.New()
@@ -326,7 +330,7 @@ func (r *warehouseRepository) TransferProduct(ctx context.Context, request dto.T
 		}()
 
 		w := dao.WarehouseStockDAO{}
-		if err = tx.Clauses(clause.Locking{Strength: "UPDATE"}).First(w).Where("product_uuid = ?", request.ProductUUID).Error; err != nil {
+		if err = tx.Clauses(clause.Locking{Strength: "UPDATE"}).Where("product_uuid = ?", request.ProductUUID).First(&w).Error; err != nil {
 			logger.LogWithContext(ctx).Error(fmt.Sprintf("error Query Select :: warehouseRepository.TransferProduct().SELECT-FOR-UPDATE. %s", err.Error()))
 			return err
 		}

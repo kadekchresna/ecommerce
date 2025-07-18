@@ -8,7 +8,7 @@ import (
 )
 
 type InboxDAO struct {
-	UUID       uuid.UUID             `gorm:"type:uuid;default:primaryKey"`
+	UUID       uuid.UUID             `gorm:"type:uuid;primaryKey"`
 	Metadata   string                `gorm:"type:jsonb;not null;default:'{}'"`
 	Response   string                `gorm:"type:jsonb;not null"`
 	Status     model.InboxStatusType `gorm:"type:inbox_status_type;not null"`

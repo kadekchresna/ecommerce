@@ -24,7 +24,7 @@ func NewWarehouseHandler(
 		WarehouseUsecase: WarehouseUsecase,
 	}
 
-	v1Warehouse := g.Group("/warehouse")
+	v1Warehouse := g.Group("/warehouse", jwt.JWTMiddleware)
 
 	v1Warehouse.GET("/:uuid", u.GetWarehouse)
 	v1Warehouse.GET("/stock/:uuid", u.GetProductStock)
