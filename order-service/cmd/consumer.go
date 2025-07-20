@@ -8,6 +8,7 @@ import (
 	"syscall"
 	"time"
 
+	"github.com/google/uuid"
 	"github.com/joho/godotenv"
 	"github.com/kadekchresna/ecommerce/order-service/config"
 	"github.com/kadekchresna/ecommerce/order-service/helper/logger"
@@ -77,7 +78,7 @@ func runConsumer() {
 	)
 	db := driver_db.InitDB(dsn)
 	timer := helper_time.NewTime(nil)
-	uuidHelper := helper_uuid.NewUUID(nil)
+	uuidHelper := helper_uuid.NewUUID(uuid.UUID{})
 
 	producer := kafka.NewKafkaProducer(
 		[]string{config.KafkaURL},

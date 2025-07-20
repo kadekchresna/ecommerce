@@ -5,7 +5,7 @@
 -- Dumped from database version 16.6 (Debian 16.6-1.pgdg120+1)
 -- Dumped by pg_dump version 16.9 (Homebrew)
 
--- Started on 2025-07-15 00:36:26 WITA
+-- Started on 2025-07-20 12:15:48 WITA
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -56,19 +56,6 @@ CREATE SCHEMA public;
 COMMENT ON SCHEMA public IS 'standard public schema';
 
 
---
--- TOC entry 843 (class 1247 OID 35433)
--- Name: outbox_status_type; Type: TYPE; Schema: public; Owner: -
---
-
-CREATE TYPE public.outbox_status_type AS ENUM (
-    'created',
-    'in-progress',
-    'failed',
-    'success'
-);
-
-
 SET default_tablespace = '';
 
 SET default_table_access_method = heap;
@@ -97,9 +84,12 @@ CREATE TABLE public.shops (
 -- Data for Name: shops; Type: TABLE DATA; Schema: public; Owner: -
 --
 
-COPY public.shops (uuid, code, user_uuid, name, "desc", created_at, updated_at, created_by, updated_by) FROM stdin;
-ee7ae731-2eed-42f6-8852-d84c8847f112	gramedia-1	baf64f79-0bc2-4333-b126-c36445e6851b	Gramedia	Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas finibus diam et arcu ultrices laoreet. Nulla et quam fermentum, tincidunt mauris nec, vestibulum diam. Nulla pulvinar diam ipsum, gravida porttitor nulla finibus sit amet. Sed faucibus, sapien vitae ornare tempus, nunc nisl rhoncus magna, quis imperdiet ligula lorem in nulla. Fusce dapibus quis lorem consectetur viverra. Phasellus maximus purus nec ligula iaculis, ac aliquet tortor fringilla. Cras imperdiet id magna ac convallis.\n\n	2025-07-13 18:45:11.235314+00	2025-07-13 18:45:11.235314+00	baf64f79-0bc2-4333-b126-c36445e6851b	baf64f79-0bc2-4333-b126-c36445e6851b
-\.
+INSERT INTO public.shops VALUES ('ee7ae731-2eed-42f6-8852-d84c8847f112', 'gramedia-1', 'baf64f79-0bc2-4333-b126-c36445e6851b', 'Gramedia', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas finibus diam et arcu ultrices laoreet. Nulla et quam fermentum, tincidunt mauris nec, vestibulum diam. Nulla pulvinar diam ipsum, gravida porttitor nulla finibus sit amet. Sed faucibus, sapien vitae ornare tempus, nunc nisl rhoncus magna, quis imperdiet ligula lorem in nulla. Fusce dapibus quis lorem consectetur viverra. Phasellus maximus purus nec ligula iaculis, ac aliquet tortor fringilla. Cras imperdiet id magna ac convallis.
+
+', '2025-07-13 18:45:11.235314+00', '2025-07-13 18:45:11.235314+00', 'baf64f79-0bc2-4333-b126-c36445e6851b', 'baf64f79-0bc2-4333-b126-c36445e6851b');
+INSERT INTO public.shops VALUES ('1d1072d0-9ccb-4a4e-8e50-4ff5940d22f0', 'periplus-1', 'baf64f79-0bc2-4333-b126-c36445e6851b', 'Periplus', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas finibus diam et arcu ultrices laoreet. Nulla et quam fermentum, tincidunt mauris nec, vestibulum diam. Nulla pulvinar diam ipsum, gravida porttitor nulla finibus sit amet. Sed faucibus, sapien vitae ornare tempus, nunc nisl rhoncus magna, quis imperdiet ligula lorem in nulla. Fusce dapibus quis lorem consectetur viverra. Phasellus maximus purus nec ligula iaculis, ac aliquet tortor fringilla. Cras imperdiet id magna ac convallis.
+
+', '2025-07-18 07:30:03.606609+00', '2025-07-18 07:30:03.606609+00', 'baf64f79-0bc2-4333-b126-c36445e6851b', 'baf64f79-0bc2-4333-b126-c36445e6851b');
 
 
 --
@@ -119,7 +109,7 @@ ALTER TABLE ONLY public.shops
 CREATE UNIQUE INDEX shops_code_idx ON public.shops USING btree (code);
 
 
--- Completed on 2025-07-15 00:36:26 WITA
+-- Completed on 2025-07-20 12:15:48 WITA
 
 --
 -- PostgreSQL database dump complete

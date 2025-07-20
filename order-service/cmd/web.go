@@ -7,6 +7,7 @@ import (
 	"net/http"
 	"os"
 
+	"github.com/google/uuid"
 	"github.com/joho/godotenv"
 	"github.com/kadekchresna/ecommerce/order-service/config"
 	"github.com/kadekchresna/ecommerce/order-service/helper/logger"
@@ -97,7 +98,7 @@ func run() {
 	defer producer.Close()
 
 	timeHelper := helper_time.NewTime(nil)
-	uuidHelper := helper_uuid.NewUUID(nil)
+	uuidHelper := helper_uuid.NewUUID(uuid.UUID{})
 
 	// V1 Endpoints
 	v1 := e.Group("/api/v1")

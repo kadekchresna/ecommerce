@@ -1,16 +1,26 @@
 all: false
-dir: '{{.InterfaceDir}}/mocks'
-filename: mocks.go
+dir: "{{.InterfaceDir}}"
+filename: mocks/mocks.go
 force-file-write: true
 formatter: goimports
 log-level: info
-structname: '{{.Mock}}{{.InterfaceName}}'
-pkgname: '{{.SrcPackageName}}_test'
-recursive: true
+structname: "{{.Mock}}{{.InterfaceName}}"
+pkgname: mocks
+recursive: false
 require-template-schema-exists: true
 template: testify
-template-schema: '{{.Template}}.schema.json'
+template-schema: "{{.Template}}.schema.json"
 packages:
-  github.com/kadekchresna/payroll:
-    config:
-      all: true
+  github.com/kadekchresna/ecommerce/order-service/infrastructure/lock:
+    interfaces:
+      DistributedLock: {}
+  github.com/kadekchresna/ecommerce/order-service/infrastructure/messaging:
+    interfaces:
+      Producer: {}
+  github.com/kadekchresna/ecommerce/order-service/internal/v1/repository/interface:
+    interfaces:
+      IOrdersRepository: {}
+      IProductRepository: {}
+  github.com/kadekchresna/ecommerce/order-service/internal/v1/usecase/interface:
+    interfaces:
+      IOrdersUsecase: {}

@@ -1,7 +1,7 @@
 replicaCount: 2
 image:
   repository: ghcr.io/kadekchresna/orders-service
-  tag: latest
+  tag: v2
   pullPolicy: IfNotPresent
 
 service:
@@ -11,8 +11,8 @@ service:
 
 resources:
   limits:
-    memory: "128Mi"
-    cpu: "250m"
+    memory: "64Mi"
+    cpu: "125m"
 
 livenessProbe:
   path: /api/v1/healthz

@@ -5,7 +5,7 @@
 -- Dumped from database version 16.6 (Debian 16.6-1.pgdg120+1)
 -- Dumped by pg_dump version 16.9 (Homebrew)
 
--- Started on 2025-07-15 00:37:26 WITA
+-- Started on 2025-07-20 12:22:54 WITA
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -173,34 +173,17 @@ CREATE TABLE public.warehouses_stock (
 
 
 --
--- TOC entry 3416 (class 0 OID 35613)
--- Dependencies: 217
--- Data for Name: inbox; Type: TABLE DATA; Schema: public; Owner: -
---
-
-COPY public.inbox (uuid, metadata, status, type, created_at, updated_at, reference, response, retry_count, action) FROM stdin;
-\.
-
-
---
--- TOC entry 3417 (class 0 OID 35629)
--- Dependencies: 218
--- Data for Name: outbox; Type: TABLE DATA; Schema: public; Owner: -
---
-
-COPY public.outbox (uuid, metadata, status, type, created_at, updated_at, reference, response, retry_count, action) FROM stdin;
-\.
-
-
---
 -- TOC entry 3414 (class 0 OID 34957)
 -- Dependencies: 215
 -- Data for Name: warehouses; Type: TABLE DATA; Schema: public; Owner: -
 --
 
-COPY public.warehouses (uuid, name, code, "desc", shop_uuid, created_at, updated_at, created_by, updated_by, status) FROM stdin;
-1533773f-d3f5-47d0-b483-45646f030476	Gudang Gramedia Denpasar 1	gudang-gramedia-denpasar-1	Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris ultrices est in nulla finibus facilisis. Vivamus neque tellus, suscipit eget purus sed, facilisis convallis libero. Quisque id eleifend risus. Quisque iaculis dapibus magna id sodales. Ut lacinia ante sed enim gravida, scelerisque commodo velit vulputate. Aliquam malesuada lacus ut nisi mollis condimentum. Fusce ac euismod velit. Morbi sit amet ullamcorper turpis. Phasellus ut cursus lorem. Fusce vitae tempor elit, sed viverra dui. Donec mattis, nisi sed gravida tincidunt, dolor mi venenatis urna, id ullamcorper dui nibh eu nunc.\n\n	ee7ae731-2eed-42f6-8852-d84c8847f112	2025-07-13 18:46:24.040278+00	2025-07-13 18:46:24.040278+00	baf64f79-0bc2-4333-b126-c36445e6851b	baf64f79-0bc2-4333-b126-c36445e6851b	active
-\.
+INSERT INTO public.warehouses VALUES ('1533773f-d3f5-47d0-b483-45646f030476', 'Gudang Gramedia Denpasar 1', 'gudang-gramedia-denpasar-1', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris ultrices est in nulla finibus facilisis. Vivamus neque tellus, suscipit eget purus sed, facilisis convallis libero. Quisque id eleifend risus. Quisque iaculis dapibus magna id sodales. Ut lacinia ante sed enim gravida, scelerisque commodo velit vulputate. Aliquam malesuada lacus ut nisi mollis condimentum. Fusce ac euismod velit. Morbi sit amet ullamcorper turpis. Phasellus ut cursus lorem. Fusce vitae tempor elit, sed viverra dui. Donec mattis, nisi sed gravida tincidunt, dolor mi venenatis urna, id ullamcorper dui nibh eu nunc.
+
+', 'ee7ae731-2eed-42f6-8852-d84c8847f112', '2025-07-13 18:46:24.040278+00', '2025-07-13 18:46:24.040278+00', 'baf64f79-0bc2-4333-b126-c36445e6851b', 'baf64f79-0bc2-4333-b126-c36445e6851b', 'active');
+INSERT INTO public.warehouses VALUES ('c0ccf00b-4e59-4318-a7ad-d5af5979bedd', 'Gudang Periplues Denpasar 1', 'gudang-periplus-denpasar-1', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris ultrices est in nulla finibus facilisis. Vivamus neque tellus, suscipit eget purus sed, facilisis convallis libero. Quisque id eleifend risus. Quisque iaculis dapibus magna id sodales. Ut lacinia ante sed enim gravida, scelerisque commodo velit vulputate. Aliquam malesuada lacus ut nisi mollis condimentum. Fusce ac euismod velit. Morbi sit amet ullamcorper turpis. Phasellus ut cursus lorem. Fusce vitae tempor elit, sed viverra dui. Donec mattis, nisi sed gravida tincidunt, dolor mi venenatis urna, id ullamcorper dui nibh eu nunc.
+
+', '1d1072d0-9ccb-4a4e-8e50-4ff5940d22f0', '2025-07-18 07:30:17.472982+00', '2025-07-18 07:42:31.981652+00', 'baf64f79-0bc2-4333-b126-c36445e6851b', 'baf64f79-0bc2-4333-b126-c36445e6851b', 'inactive');
 
 
 --
@@ -209,18 +192,16 @@ COPY public.warehouses (uuid, name, code, "desc", shop_uuid, created_at, updated
 -- Data for Name: warehouses_stock; Type: TABLE DATA; Schema: public; Owner: -
 --
 
-COPY public.warehouses_stock (uuid, warehouse_uuid, product_uuid, start_quantity, reserve_quantity, created_at, updated_at, created_by, updated_by) FROM stdin;
-5087df34-1baf-4a5f-bd9c-ba066e2baf5a	1533773f-d3f5-47d0-b483-45646f030476	865edd5c-b190-4899-8c1a-e62780b7948b	20	0	2025-07-13 18:51:58.631164+00	2025-07-13 18:51:58.631164+00	baf64f79-0bc2-4333-b126-c36445e6851b	baf64f79-0bc2-4333-b126-c36445e6851b
-9d31ae13-55b8-4a73-9846-4c21044d1336	1533773f-d3f5-47d0-b483-45646f030476	9046175d-aaf8-4348-9ac3-3de1db6189e2	20	0	2025-07-13 18:51:58.631164+00	2025-07-13 18:51:58.631164+00	baf64f79-0bc2-4333-b126-c36445e6851b	baf64f79-0bc2-4333-b126-c36445e6851b
-8e7806ab-1376-4287-8dad-3ed2c22fcf8a	1533773f-d3f5-47d0-b483-45646f030476	e365ccc8-6b3d-4411-a2cb-a648f129f678	20	0	2025-07-13 18:51:58.631164+00	2025-07-13 18:51:58.631164+00	baf64f79-0bc2-4333-b126-c36445e6851b	baf64f79-0bc2-4333-b126-c36445e6851b
-c92b2690-bca5-4c44-8fad-a96c864f37e9	1533773f-d3f5-47d0-b483-45646f030476	6dad167b-6f72-48d2-a0c9-7747c0bbdacd	20	0	2025-07-13 18:51:58.631164+00	2025-07-13 18:51:58.631164+00	baf64f79-0bc2-4333-b126-c36445e6851b	baf64f79-0bc2-4333-b126-c36445e6851b
-ecf72266-e0ad-4a8d-9783-1feba0bb0e8c	1533773f-d3f5-47d0-b483-45646f030476	fc20e0db-0b06-41b2-9949-d0b4f57dec0b	20	0	2025-07-13 18:51:58.631164+00	2025-07-13 18:51:58.631164+00	baf64f79-0bc2-4333-b126-c36445e6851b	baf64f79-0bc2-4333-b126-c36445e6851b
-171ad69f-ca3c-46e0-8ad6-d8fb6eecfa90	1533773f-d3f5-47d0-b483-45646f030476	004d63cb-25f8-4a79-9b5f-2ee2d44ac709	20	0	2025-07-13 18:51:58.631164+00	2025-07-13 21:52:43.783794+00	baf64f79-0bc2-4333-b126-c36445e6851b	baf64f79-0bc2-4333-b126-c36445e6851b
-aa383a3b-898c-429c-814a-19e554609630	1533773f-d3f5-47d0-b483-45646f030476	96a70723-dc22-4ecd-abbf-b9024b736b22	20	0	2025-07-13 18:51:58.631164+00	2025-07-13 22:59:06.978611+00	baf64f79-0bc2-4333-b126-c36445e6851b	baf64f79-0bc2-4333-b126-c36445e6851b
-fd61a26a-04d2-4b09-987c-fa03e34140d4	1533773f-d3f5-47d0-b483-45646f030476	8e1ce434-1e1a-4692-98ef-b1f88afe7d2e	20	0	2025-07-13 18:51:58.631164+00	2025-07-13 22:59:07.679729+00	baf64f79-0bc2-4333-b126-c36445e6851b	baf64f79-0bc2-4333-b126-c36445e6851b
-40874710-a16d-41b4-89b2-d8579a18f0fb	1533773f-d3f5-47d0-b483-45646f030476	13744495-caa4-4e93-bdb2-68b68c0742e2	20	0	2025-07-13 18:51:58.631164+00	2025-07-13 23:49:03.589216+00	baf64f79-0bc2-4333-b126-c36445e6851b	baf64f79-0bc2-4333-b126-c36445e6851b
-8ae66e24-de46-4057-bfe9-2e1f0944faaa	1533773f-d3f5-47d0-b483-45646f030476	50ca5859-f78c-4c8a-a311-a8da117c6ab8	20	0	2025-07-13 18:51:58.631164+00	2025-07-13 23:49:03.59215+00	baf64f79-0bc2-4333-b126-c36445e6851b	baf64f79-0bc2-4333-b126-c36445e6851b
-\.
+INSERT INTO public.warehouses_stock VALUES ('5087df34-1baf-4a5f-bd9c-ba066e2baf5a', '1533773f-d3f5-47d0-b483-45646f030476', '865edd5c-b190-4899-8c1a-e62780b7948b', 20, 0, '2025-07-13 18:51:58.631164+00', '2025-07-13 18:51:58.631164+00', 'baf64f79-0bc2-4333-b126-c36445e6851b', 'baf64f79-0bc2-4333-b126-c36445e6851b');
+INSERT INTO public.warehouses_stock VALUES ('9d31ae13-55b8-4a73-9846-4c21044d1336', '1533773f-d3f5-47d0-b483-45646f030476', '9046175d-aaf8-4348-9ac3-3de1db6189e2', 20, 0, '2025-07-13 18:51:58.631164+00', '2025-07-13 18:51:58.631164+00', 'baf64f79-0bc2-4333-b126-c36445e6851b', 'baf64f79-0bc2-4333-b126-c36445e6851b');
+INSERT INTO public.warehouses_stock VALUES ('8e7806ab-1376-4287-8dad-3ed2c22fcf8a', '1533773f-d3f5-47d0-b483-45646f030476', 'e365ccc8-6b3d-4411-a2cb-a648f129f678', 20, 0, '2025-07-13 18:51:58.631164+00', '2025-07-13 18:51:58.631164+00', 'baf64f79-0bc2-4333-b126-c36445e6851b', 'baf64f79-0bc2-4333-b126-c36445e6851b');
+INSERT INTO public.warehouses_stock VALUES ('ecf72266-e0ad-4a8d-9783-1feba0bb0e8c', '1533773f-d3f5-47d0-b483-45646f030476', 'fc20e0db-0b06-41b2-9949-d0b4f57dec0b', 20, 0, '2025-07-13 18:51:58.631164+00', '2025-07-13 18:51:58.631164+00', 'baf64f79-0bc2-4333-b126-c36445e6851b', 'baf64f79-0bc2-4333-b126-c36445e6851b');
+INSERT INTO public.warehouses_stock VALUES ('c92b2690-bca5-4c44-8fad-a96c864f37e9', 'c0ccf00b-4e59-4318-a7ad-d5af5979bedd', '6dad167b-6f72-48d2-a0c9-7747c0bbdacd', 20, 0, '2025-07-13 18:51:58.631164+00', '2025-07-18 08:12:41.417653+00', 'baf64f79-0bc2-4333-b126-c36445e6851b', 'baf64f79-0bc2-4333-b126-c36445e6851b');
+INSERT INTO public.warehouses_stock VALUES ('40874710-a16d-41b4-89b2-d8579a18f0fb', '1533773f-d3f5-47d0-b483-45646f030476', '13744495-caa4-4e93-bdb2-68b68c0742e2', 20, 0, '2025-07-13 18:51:58.631164+00', '2025-07-18 08:21:23.384099+00', 'baf64f79-0bc2-4333-b126-c36445e6851b', 'baf64f79-0bc2-4333-b126-c36445e6851b');
+INSERT INTO public.warehouses_stock VALUES ('171ad69f-ca3c-46e0-8ad6-d8fb6eecfa90', '1533773f-d3f5-47d0-b483-45646f030476', '004d63cb-25f8-4a79-9b5f-2ee2d44ac709', 20, 0, '2025-07-13 18:51:58.631164+00', '2025-07-13 21:52:43.783794+00', 'baf64f79-0bc2-4333-b126-c36445e6851b', 'baf64f79-0bc2-4333-b126-c36445e6851b');
+INSERT INTO public.warehouses_stock VALUES ('aa383a3b-898c-429c-814a-19e554609630', '1533773f-d3f5-47d0-b483-45646f030476', '96a70723-dc22-4ecd-abbf-b9024b736b22', 20, 0, '2025-07-13 18:51:58.631164+00', '2025-07-13 22:59:06.978611+00', 'baf64f79-0bc2-4333-b126-c36445e6851b', 'baf64f79-0bc2-4333-b126-c36445e6851b');
+INSERT INTO public.warehouses_stock VALUES ('fd61a26a-04d2-4b09-987c-fa03e34140d4', '1533773f-d3f5-47d0-b483-45646f030476', '8e1ce434-1e1a-4692-98ef-b1f88afe7d2e', 20, 0, '2025-07-13 18:51:58.631164+00', '2025-07-13 22:59:07.679729+00', 'baf64f79-0bc2-4333-b126-c36445e6851b', 'baf64f79-0bc2-4333-b126-c36445e6851b');
+INSERT INTO public.warehouses_stock VALUES ('8ae66e24-de46-4057-bfe9-2e1f0944faaa', '1533773f-d3f5-47d0-b483-45646f030476', '50ca5859-f78c-4c8a-a311-a8da117c6ab8', 20, 0, '2025-07-13 18:51:58.631164+00', '2025-07-13 23:49:03.59215+00', 'baf64f79-0bc2-4333-b126-c36445e6851b', 'baf64f79-0bc2-4333-b126-c36445e6851b');
 
 
 --
@@ -317,7 +298,7 @@ CREATE INDEX warehouse_shop_uuid_idx ON public.warehouses USING btree (shop_uuid
 CREATE INDEX warehouse_stock_warehouse_uuid_idx ON public.warehouses_stock USING btree (warehouse_uuid, product_uuid);
 
 
--- Completed on 2025-07-15 00:37:26 WITA
+-- Completed on 2025-07-20 12:22:54 WITA
 
 --
 -- PostgreSQL database dump complete

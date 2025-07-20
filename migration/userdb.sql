@@ -5,7 +5,7 @@
 -- Dumped from database version 16.6 (Debian 16.6-1.pgdg120+1)
 -- Dumped by pg_dump version 16.9 (Homebrew)
 
--- Started on 2025-07-15 00:36:40 WITA
+-- Started on 2025-07-20 12:19:49 WITA
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -101,9 +101,7 @@ CREATE TABLE public.users_auth (
 -- Data for Name: users; Type: TABLE DATA; Schema: public; Owner: -
 --
 
-COPY public.users (uuid, fullname, created_at, updated_at, code, created_by, updated_by) FROM stdin;
-baf64f79-0bc2-4333-b126-c36445e6851b	admin	2025-07-12 02:19:13.556744+00	2025-07-12 02:19:13.556744+00	U1	baf64f79-0bc2-4333-b126-c36445e6851b	baf64f79-0bc2-4333-b126-c36445e6851b
-\.
+INSERT INTO public.users VALUES ('baf64f79-0bc2-4333-b126-c36445e6851b', 'admin', '2025-07-12 02:19:13.556744+00', '2025-07-12 02:19:13.556744+00', 'U1', 'baf64f79-0bc2-4333-b126-c36445e6851b', 'baf64f79-0bc2-4333-b126-c36445e6851b');
 
 
 --
@@ -112,9 +110,7 @@ baf64f79-0bc2-4333-b126-c36445e6851b	admin	2025-07-12 02:19:13.556744+00	2025-07
 -- Data for Name: users_auth; Type: TABLE DATA; Schema: public; Owner: -
 --
 
-COPY public.users_auth (uuid, email, phone_number, password, salt, created_at, updated_at, user_uuid, created_by, updated_by) FROM stdin;
-1f7d4417-fdbc-46fd-a7a5-ddfecdfa0afa	admin@mail.com	6285280042233	Pep/e5hZObYronYQeNj3c2BWAiU7RAZ0uG0m7SFEjDM=	rKxyNitzMfnfqmpWOsbezQ==	2025-07-12 02:20:40.327997+00	2025-07-12 02:20:40.327997+00	baf64f79-0bc2-4333-b126-c36445e6851b	baf64f79-0bc2-4333-b126-c36445e6851b	baf64f79-0bc2-4333-b126-c36445e6851b
-\.
+INSERT INTO public.users_auth VALUES ('1f7d4417-fdbc-46fd-a7a5-ddfecdfa0afa', 'admin@mail.com', '6285280042233', 'Pep/e5hZObYronYQeNj3c2BWAiU7RAZ0uG0m7SFEjDM=', 'rKxyNitzMfnfqmpWOsbezQ==', '2025-07-12 02:20:40.327997+00', '2025-07-12 02:20:40.327997+00', 'baf64f79-0bc2-4333-b126-c36445e6851b', 'baf64f79-0bc2-4333-b126-c36445e6851b', 'baf64f79-0bc2-4333-b126-c36445e6851b');
 
 
 --
@@ -151,7 +147,7 @@ CREATE INDEX user_auth_user_uuid_idx ON public.users_auth USING btree (user_uuid
 CREATE INDEX users_code_idx ON public.users USING btree (code);
 
 
--- Completed on 2025-07-15 00:36:40 WITA
+-- Completed on 2025-07-20 12:19:49 WITA
 
 --
 -- PostgreSQL database dump complete

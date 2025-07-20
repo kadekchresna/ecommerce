@@ -65,7 +65,7 @@ spec:
             - name: POSTGRES_HOST
               value: "{{ .Release.Name }}-postgresql"
             - name: KAFKA_URL
-              value: "kafka:9092"
+              value: "host.docker.internal:29092"
             - name: REDIS_URL
               value: {{ .Release.Name }}-redis-master:6379
             - name: APP_NAME
@@ -78,6 +78,13 @@ spec:
               value: secret
             - name: APP_JWT_SECRET
               value: secret
+            - name: WAREHOUSE_SERVICE_URL
+              value: http://warehouse-service-warehouse-service.default.svc.cluster.local/api/v1
+            - name: SHOP_SERVICE_URL
+              value: http://shop-service-shop-service.default.svc.cluster.local/api/v1
+            - name: PRODUCT_SERVICE_URL
+              value: http://product-service-product-service.default.svc.cluster.local/api/v1
+              
         - name: {{ .Chart.Name }}-consumer
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
@@ -109,7 +116,7 @@ spec:
             - name: POSTGRES_HOST
               value: "{{ .Release.Name }}-postgresql"
             - name: KAFKA_URL
-              value: "kafka:9092"
+              value: "host.docker.internal:29092"
             - name: REDIS_URL
               value: {{ .Release.Name }}-redis-master:6379
             - name: APP_NAME
@@ -120,5 +127,10 @@ spec:
               value: "8081"
             - name: APP_STATIC_TOKEN
               value: secret
-            - name: APP_JWT_SECRET
-              value: secret
+            - name: WAREHOUSE_SERVICE_URL
+              value: http://warehouse-service-warehouse-service.default.svc.cluster.local/api/v1
+            - name: SHOP_SERVICE_URL
+              value: http://shop-service-shop-service.default.svc.cluster.local/api/v1
+            - name: PRODUCT_SERVICE_URL
+              value: http://product-service-product-service.default.svc.cluster.local/api/v1
+              

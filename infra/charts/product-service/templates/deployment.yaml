@@ -74,3 +74,9 @@ spec:
               value: secret
             - name: APP_JWT_SECRET
               value: secret
+            - name: WAREHOUSE_SERVICE_URL
+              value: http://warehouse-service-warehouse-service.default.svc.cluster.local/api/v1
+            - name: SHOP_SERVICE_URL
+              value: http://shop-service-shop-service.default.svc.cluster.local/api/v1
+            - name: PRODUCT_SERVICE_URL
+              value: http://product-service-product-service.default.svc.cluster.local/api/v1

@@ -19,7 +19,7 @@ type ordersHandler struct {
 func NewOrdersHandler(
 	g *echo.Group,
 	OrdersUsecase usecase_interface.IOrdersUsecase,
-) {
+) *ordersHandler {
 	u := &ordersHandler{
 		OrdersUsecase: OrdersUsecase,
 	}
@@ -31,6 +31,8 @@ func NewOrdersHandler(
 	v1Order.POST("/run-inbox", u.ProcessInbox)
 	v1Order.POST("/set-completed/:uuid", u.UpdateOrderCompleted)
 	v1Order.POST("/set-expired", u.UpdateOrderExpired)
+
+	return u
 
 }
 
